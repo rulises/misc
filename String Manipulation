@@ -1,0 +1,56 @@
+================================================
+               Reverse String
+------------------------------------------------
+C++
+---> LIBRARY
+#include <algorithm>
+#include <string>
+int main(){
+  string str = ¨blabla¨
+  std::reverse(str.begin(),str.end());
+}
+---> IN PLACE
+#include <string>
+void reverse(char * str){
+  char temp,
+  char* endptr,
+
+  //If Null
+  if(str==NULL)
+    return;
+
+  // strings end with null 
+  endptr = strlen(str) - 1;
+
+  //Reverse
+  while(endptr >str){
+    temp = *str;
+    *str = *endptr;
+    *endptr = temp;
+    str++;
+    endptr--;
+  }
+
+}
+--> WITH BUFFER
+char[] reverse(char * str){
+  char* buffer = new char[strlen(str)];
+  for(int frontptr =0, backptr= strlen(str); frontptr<backptr; frontptr++, backptr-- ){
+    buffer[frontptr] = str[backptr];
+    buffer[backptr] = str[frontptr];
+  }
+  return buffer;
+}
+
+================================================
+================================================
+Reverse Every Word of a Sentece
+------------------------------------------------
+
+
+
+
+
+
+
+================================================
