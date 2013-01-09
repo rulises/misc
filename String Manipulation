@@ -6,7 +6,7 @@ C++
 #include <algorithm>
 #include <string>
 int main(){
-  string str = ¨blabla¨
+  string str = "blabla"
   std::reverse(str.begin(),str.end());
 }
 ---> IN PLACE
@@ -44,13 +44,97 @@ char[] reverse(char * str){
 
 ================================================
 ================================================
-Reverse Every Word of a Sentece
+Reverse a Sentece
 ------------------------------------------------
+#include <string>
+#include <iostream>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+string reverse(string str){
+               /*Algorithm
+		1.Iterate through sentence 
+		2.Store words into vector
+		3.Iterate through vector back to front
+		4.Append to newSentence
+	*/
+	vector<string> words;
+	char* cptr = str;
+	int front= 0;
+	int back = 0;
+	while(cptr!=NULL){
+		if(cptr == " "){
+			words.push_back(str.substr(front,back));
+			front = cptr+1;
+		}
+		else{
+			back++;
+		}
+		cptr++;
+	}
+	
+	string newStr;
+	/*for(vector<string>::iterator it = words.end();it!=words.begin();it--){
+		str.append(*it);
+	}*/
+	while(!words.empty()){
+		str.append(words.back());
+		words.pop_back();
+	}
+	return newStr;
+}
+
+int main(){
+	string sentece("blablaba dasdas dsds");
+	string newSentence;
+	newSentence = reverse(str);
+	cout<<newSentence<<endl;
+}
 
 
+===
 
 
+ALTERNATIVE: Credit to Sepp2k
+using std::cout;
+using std::endl;
+using std::reverse;
 
+// Splits a sentence by spaces into a vector of words
+void extract(const string& sentence, vector<string>& words)
+{
+    size_t pos = 0;
+    while(pos != string::npos)
+    {  
+        // Find position of next space
+        int next_space = sentence.find(" ", pos);
+        // Store everything up to next space in the words vector
+        words.push_back( sentence.substr(pos, next_space - pos));
 
+        // Continue at the next character which is not a space.
+        pos = sentence.find_first_not_of(" ", next_space);
+    }
+}
 
+// Prints the strings in the vector separated by spaces
+void print_strings(const vector<string>& strings)
+{
+    for(size_t i = 0; i < strings.size(); i++) {
+        cout << strings[i] << " ";
+    }
+    cout << endl;
+}
+
+int main()
+{
+    string sentence("seattle is good");
+    vector<string> words;
+    extract(sentence, words);
+    reverse(words.begin(), words.end());
+    print_strings(words);
+}
 ================================================
